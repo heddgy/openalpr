@@ -305,7 +305,7 @@ namespace alpr
     for (unsigned int i = 0; i < charPoints.size(); i++)
       charheights.push_back(charPoints[i].boundingBox.height);
     float medianCharHeight = median(charheights.data(), charheights.size());
-
+    int maxCharHeight = maximum(chargeihts.data(), charheights.size());
 
 
     vector<LineSegment> topLines;
@@ -334,8 +334,8 @@ namespace alpr
 
 
 
-        LineSegment parallelBot = top.getParallelLine(medianCharHeight * -1);
-        LineSegment parallelTop = bottom.getParallelLine(medianCharHeight);
+        LineSegment parallelBot = top.getParallelLine(maxCharHeight * -1);
+        LineSegment parallelTop = bottom.getParallelLine(maxCharHeight);
 
         // Only allow lines that have a sane angle
         if (abs(top.angle) <= pipeline_data->config->maxPlateAngleDegrees &&
@@ -375,8 +375,33 @@ namespace alpr
         float maxTop = charPoints[charidx].top.y * SCORING_MAX_THRESHOLD;
         float minBot = (charPoints[charidx].bottom.y) * SCORING_MIN_THRESHOLD;
         float maxBot = (charPoints[charidx].bottom.y) * SCORING_MAX_THRESHOLD;
-        if ( (topYPos >= minTop && topYPos <= maxTop) &&
-             (botYPos >= minBot && botYPos <= maxBot))
+        // If top line lower than bottom of char or bottom line higher than top of char
+        if (topYPos > maxBot || botYPos < minTop)
+        {
+          continue;
+        }
+        // We got 6 points max per char if it perfectly attached to both lines, 4 if it's attached to one of the line and only 2 if it's between the lines. 
+        if (topYPos <= maxTop)
+        {
+          curScore++;
+        }
+        if (topYPos >= minTop)
+        {
+          curScore++;
+        }
+        if (topYPos <= maxTop && topYPos >= minTop)
+        {
+          curScore++;
+        }
+        if (botYPos <= maxBot)
+        {
+          curScore++;
+        }
+        if (botYPos >= minBot)
+        {
+          curScore++;
+        }
+        if (botYPos <= maxBot && botYPos >= minBot)
         {
           curScore++;
         }
