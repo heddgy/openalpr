@@ -183,6 +183,17 @@ namespace alpr
     std::sort(&array[0], &array[arraySize]);
     return arraySize % 2 ? array[arraySize / 2] : (array[arraySize / 2 - 1] + array[arraySize / 2]) / 2;
   }
+	
+  int maximum(int array[], int arraySize)
+  {
+    if (arraySize == 0)
+    {
+      return 0;
+    }
+
+    int maxel = *std::max_element(&array[0], &array[arraySize])
+    return maxel
+  }
 
   Mat equalizeBrightness(Mat img)
   {
