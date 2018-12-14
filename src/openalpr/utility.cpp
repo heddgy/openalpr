@@ -192,7 +192,7 @@ namespace alpr
     }
 
     int maxel = *std::max_element(&array[0], &array[arraySize]);
-    return maxel
+    return maxel;
   }
 
   Mat equalizeBrightness(Mat img)
