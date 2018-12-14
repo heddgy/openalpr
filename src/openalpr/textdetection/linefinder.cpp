@@ -305,7 +305,7 @@ namespace alpr
     for (unsigned int i = 0; i < charPoints.size(); i++)
       charheights.push_back(charPoints[i].boundingBox.height);
     float medianCharHeight = median(charheights.data(), charheights.size());
-    int maxCharHeight = maximum(chargeihts.data(), charheights.size());
+    int maxCharHeight = maximum(charheights.data(), charheights.size());
 
 
     vector<LineSegment> topLines;
