@@ -73,6 +73,7 @@ namespace alpr
   };
 
   double median(int array[], int arraySize);
+  int maximum(int array[], int arraySize);
 
   std::vector<cv::Mat> produceThresholds(const cv::Mat img_gray, Config* config);
 
