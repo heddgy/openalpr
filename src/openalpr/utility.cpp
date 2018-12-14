@@ -191,7 +191,7 @@ namespace alpr
       return 0;
     }
 
-    int maxel = *std::max_element(&array[0], &array[arraySize])
+    int maxel = *std::max_element(&array[0], &array[arraySize]);
     return maxel
   }
 
