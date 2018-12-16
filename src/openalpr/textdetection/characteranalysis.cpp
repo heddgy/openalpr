@@ -136,15 +136,6 @@ namespace alpr
       return;
     }
 
-    //getColorMask(img, allContours, allHierarchy, charSegments);
-
-    if (this->config->debugCharAnalysis)
-    {
-      Mat img_contours = bestContours.drawDebugImage(bestThreshold);
-
-      displayImage(config, "Matching Contours", img_contours);
-    }
-
     if (config->auto_invert)
       pipeline_data->plate_inverted = isPlateInverted();
     else
@@ -261,17 +252,7 @@ namespace alpr
       }
 
       // Draw the best threshold with all the contours detected
-      Mat bestVal(this->bestThreshold.size(), this->bestThreshold.type());
-      this->bestThreshold.copyTo(bestVal);
-      cvtColor(bestVal, bestVal, CV_GRAY2BGR);
-
-      for (unsigned int z = 0; z < this->bestContours.size(); z++)
-      {
-        Scalar dcolor(255,0,0);
-        if (this->bestContours.goodIndices[z])
-          dcolor = Scalar(0,255,0);
-        drawContours(bestVal, this->bestContours.contours, z, dcolor, 1);
-      }
+      Mat bestVal = bestContours.drawDebugImage(bestThreshold);
       tempDash.push_back(bestVal);
             
       // Draw the best threshold with winning lines
