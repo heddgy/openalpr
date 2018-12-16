@@ -249,6 +249,8 @@ namespace alpr
     if (this->pipeline_data->config->debugCharAnalysis && pipeline_data->textLines.size() > 0)
     {
       vector<Mat> tempDash;
+      
+      // Draw all the thresholds 
       for (unsigned int z = 0; z < pipeline_data->thresholds.size(); z++)
       {
         Mat tmp(pipeline_data->thresholds[z].size(), pipeline_data->thresholds[z].type());
@@ -258,6 +260,7 @@ namespace alpr
         tempDash.push_back(tmp);
       }
 
+      // Draw the best threshold with all the contours detected
       Mat bestVal(this->bestThreshold.size(), this->bestThreshold.type());
       this->bestThreshold.copyTo(bestVal);
       cvtColor(bestVal, bestVal, CV_GRAY2BGR);
@@ -270,6 +273,24 @@ namespace alpr
         drawContours(bestVal, this->bestContours.contours, z, dcolor, 1);
       }
       tempDash.push_back(bestVal);
+            
+      // Draw the best threshold with winning lines
+      Mat bestValLines(this->bestThreshold.size(), this->bestThreshold.type());
+      this->bestThreshold.copyTo(bestValLines);
+      cvtColor(bestVal, bestVal, CV_GRAY2BGR);
+
+      for (unsigned int i = 0; i < linePolygons.size(); i++)
+      {
+        vector<Point> linePolygon = linePolygons[i];
+
+        LineSegment topLine = LineSegment(linePolygon[0].x, linePolygon[0].y, linePolygon[1].x, linePolygon[1].y);
+        LineSegment bottomLine = LineSegment(linePolygon[3].x, linePolygon[3].y, linePolygon[2].x, linePolygon[2].y);
+
+        cv::line(bestValLines, topLine.x, topLine.y, Scalar(0, 0, 255), 2);
+        cv::line(bestValLines, bottomLine.x, bottomLine.y, Scalar(0, 0, 255), 2);
+      }
+      tempDash.push_back(bestValLines);
+      
       displayImage(config, "Character Region Step 1 Thresholds", drawImageDashboard(tempDash, bestVal.type(), 3));
     }
   }
