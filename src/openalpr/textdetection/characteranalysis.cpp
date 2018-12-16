@@ -277,7 +277,7 @@ namespace alpr
       // Draw the best threshold with winning lines
       Mat bestValLines(this->bestThreshold.size(), this->bestThreshold.type());
       this->bestThreshold.copyTo(bestValLines);
-      cvtColor(bestVal, bestVal, CV_GRAY2BGR);
+      cvtColor(bestValLines, bestValLines, CV_GRAY2BGR);
 
       for (unsigned int i = 0; i < linePolygons.size(); i++)
       {
