@@ -56,22 +56,22 @@ detection_mask_image =
 
 ; OpenALPR can scan the same image multiple times with different randomization.  Setting this to a value larger than
 ; 1 may increase accuracy, but will increase processing time linearly (e.g., analysis_count = 3 is 3x slower)
-analysis_count = 1
+analysis_count = 3
 
 ; OpenALPR detects high-contrast plate crops and uses an alternative edge detection technique.  Setting this to 0.0 
 ; would classify  ALL images as high-contrast, setting it to 1.0 would classify no images as high-contrast. 
-contrast_detection_threshold = 0.3
+contrast_detection_threshold = 0.2
 
 max_plate_angle_degrees = 15
 
 ocr_min_font_point = 6
 
 ; Minimum OCR confidence percent to consider.
-postprocess_min_confidence = 65
+postprocess_min_confidence = 50
 
 ; Any OCR character lower than this will also add an equally likely
 ; chance that the character is incorrect and will be skipped.  Value is a confidence percent
-postprocess_confidence_skip_level = 80
+postprocess_confidence_skip_level = 75
 
 
 debug_general         = 0
