@@ -286,8 +286,8 @@ namespace alpr
         LineSegment topLine = LineSegment(linePolygon[0].x, linePolygon[0].y, linePolygon[1].x, linePolygon[1].y);
         LineSegment bottomLine = LineSegment(linePolygon[3].x, linePolygon[3].y, linePolygon[2].x, linePolygon[2].y);
 
-        cv::line(bestValLines, topLine.x, topLine.y, Scalar(0, 0, 255), 2);
-        cv::line(bestValLines, bottomLine.x, bottomLine.y, Scalar(0, 0, 255), 2);
+        cv::line(bestValLines, topLine.p1, topLine.p2, Scalar(0, 0, 255), 2);
+        cv::line(bestValLines, bottomLine.p1, bottomLine.p2, Scalar(0, 0, 255), 2);
       }
       tempDash.push_back(bestValLines);
       
