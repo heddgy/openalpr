@@ -415,6 +415,10 @@ namespace alpr
 
       if (parentIndex >= 0 && textContours.goodIndices[parentIndex])
       {
+        if (this->config->debugCharAnalysis)
+        {
+          cout << " ++++++++++ I'M HERE ++++++++++ " << endl;
+        }
         // this contour is a child of an already identified contour.  REMOVE it
         if (this->config->debugCharAnalysis)
         {
