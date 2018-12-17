@@ -377,7 +377,7 @@ namespace alpr
       float minWidth = mr.height * 0.2;
       //Crop image
 
-      if (this->config->debugCharAnalysis)
+      if (config->debugCharAnalysis)
       {
         cout << "Contour " << i << " Height: " << minHeightPx << " - " << mr.height << " - " << maxHeightPx << " ////// Width: " << mr.width << " - " << minWidth << endl;
       }
@@ -385,7 +385,7 @@ namespace alpr
       {
         float charAspect= (float)mr.width/(float)mr.height;
 
-        if (this->config->debugCharAnalysis)
+        if (config->debugCharAnalysis)
         {
           cout << "  -- stage 2 aspect: " << abs(charAspect) << " - " << aspecttolerance << endl;
         }
