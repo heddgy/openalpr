@@ -376,19 +376,16 @@ namespace alpr
 
       float minWidth = mr.height * 0.2;
       //Crop image
-
-      if (config->debugCharAnalysis)
-      {
-        cout << "Contour " << i << " Height: " << minHeightPx << " - " << mr.height << " - " << maxHeightPx << " ////// Width: " << mr.width << " - " << minWidth << endl;
-      }
+      
+      cout << "Contour " << i << " Height: " << minHeightPx << " - " << mr.height << " - " << maxHeightPx << " ////// Width: " << mr.width << " - " << minWidth << endl;
       if(mr.height >= minHeightPx && mr.height <= maxHeightPx && mr.width > minWidth)
       {
         float charAspect= (float)mr.width/(float)mr.height;
 
         if (config->debugCharAnalysis)
-        {
-          cout << "  -- stage 2 aspect: " << abs(charAspect) << " - " << aspecttolerance << endl;
-        }
+          
+        cout << "  -- stage 2 aspect: " << abs(charAspect) << " - " << aspecttolerance << endl;
+        
         if (abs(charAspect - idealAspect) < aspecttolerance)
           textContours.goodIndices[i] = true;
       }
