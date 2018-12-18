@@ -205,6 +205,7 @@ namespace alpr
     detection_mask_image = getString(ini, defaultIni, "", "detection_mask_image", "");
     
     analysis_count = getInt(ini, defaultIni, "", "analysis_count", 1);
+    thresholdsCount = getInt(ini, defaultIni, "", "thresholds", 3);
     
     prewarp = getString(ini, defaultIni, "", "prewarp", "");
             
@@ -295,6 +296,7 @@ namespace alpr
     charAnalysisHeightRange = getFloat(ini, "", "char_analysis_height_range", 0);
     charAnalysisHeightStepSize = getFloat(ini, "", "char_analysis_height_step_size", 0);
     charAnalysisNumSteps = getInt(ini, "", "char_analysis_height_num_steps", 0);
+    charAnalysisAspectTolerance = getFloat(ini, "", "char_analysis_aspect_tolerance", 0);
 
     segmentationMinSpeckleHeightPercent = getFloat(ini, "", "segmentation_min_speckle_height_percent", 0);
     segmentationMinBoxWidthPx = getInt(ini, "", "segmentation_min_box_width_px", 0);

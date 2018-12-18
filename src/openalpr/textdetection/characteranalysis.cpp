@@ -360,13 +360,8 @@ namespace alpr
       }
     }
     
-    if (this->config->debugCharAnalysis)
-    {
-      cout << "=========== I'M HERE ===========" << endl;
-    }
-    
     float idealAspect=larger_char_width_mm / larger_char_height_mm;
-    float aspecttolerance=0.25;
+    float aspecttolerance=config->charAnalysisAspectTolerance;
 
     for (unsigned int i = 0; i < textContours.size(); i++)
     {
@@ -382,7 +377,7 @@ namespace alpr
       //Crop image
       if (this->config->debugCharAnalysis)
       {
-        cout << "Contour " << i << " Height: " << minHeightPx << " - " << mr.height << " - " << maxHeightPx << " ////// Width: " << mr.width << " - " << minWidth << endl;
+        
       }
       
       if(mr.height >= minHeightPx && mr.height <= maxHeightPx && mr.width > minWidth)
@@ -391,11 +386,20 @@ namespace alpr
 
         if (this->config->debugCharAnalysis)
         {
-          cout << "  -- stage 2 aspect: " << abs(charAspect) << " - " << aspecttolerance << endl;
+          //cout << "  -- contour " << i << " height " << mr.height << " in [" << minHeightPx << ", " << maxHeightPx << "] width " << mr.width << ">" << minWidth << endl;
+          //cout << "  -- stage 2 aspect: abs(" << abs(charAspect) << "-" << idealAspect << ") < " << aspecttolerance << "? => ";
         }
         
         if (abs(charAspect - idealAspect) < aspecttolerance)
+        {
           textContours.goodIndices[i] = true;
+          //if (this->config->debugCharAnalysis) cout << "GOOD!" << endl;
+        }
+        else
+        {
+          //if (this->config->debugCharAnalysis) cout << "BAD.." << endl;
+        }
+          
       }
     }
 
@@ -415,10 +419,6 @@ namespace alpr
 
       if (parentIndex >= 0 && textContours.goodIndices[parentIndex])
       {
-        if (this->config->debugCharAnalysis)
-        {
-          cout << " ++++++++++ I'M HERE ++++++++++ " << endl;
-        }
         // this contour is a child of an already identified contour.  REMOVE it
         if (this->config->debugCharAnalysis)
         {

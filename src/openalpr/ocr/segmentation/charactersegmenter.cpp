@@ -425,6 +425,7 @@ namespace alpr
       }
     }
   }
+
   int CharacterSegmenter::getCharGap(cv::Rect leftBox, cv::Rect rightBox) {
       int right_midpoint = (rightBox.x + (rightBox.width / 2));
       int left_midpoint = (leftBox.x + (leftBox.width / 2));
@@ -691,7 +692,6 @@ namespace alpr
     }
   }
 
-
   vector<Rect> CharacterSegmenter::filterMostlyEmptyBoxes(vector<Mat> thresholds, const vector<Rect> charRegions)
   {
     // Of the n thresholded images, if box 3 (for example) is empty in half (for example) of the thresholded images,
@@ -741,6 +741,8 @@ namespace alpr
         }
         else if (this->config->debugCharSegmenter)
         {
+          cout << "Threshold " << i << " char " << j;
+          cout << " height " << height << "<" << (float) charRegions[j].height * MIN_CONTOUR_HEIGHT_PERCENT << endl;
           drawX(imgDbgCleanStages[i], charRegions[j], COLOR_DEBUG_EMPTYFILTER, 3);
         }
       }

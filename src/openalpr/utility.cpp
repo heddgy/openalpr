@@ -121,7 +121,7 @@ namespace alpr
 
   vector<Mat> produceThresholds(const Mat img_gray, Config* config)
   {
-    const int THRESHOLD_COUNT = 3;
+    const int THRESHOLD_COUNT = config->thresholdsCount;
     //Mat img_equalized = equalizeBrightness(img_gray);
 
     timespec startTime;

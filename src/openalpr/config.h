@@ -61,6 +61,7 @@ namespace alpr
       std::string detection_mask_image;
 
       int analysis_count;
+      int thresholdsCount;
       
       bool auto_invert;
       bool always_invert;
@@ -100,6 +101,7 @@ namespace alpr
       float charAnalysisHeightRange;
       float charAnalysisHeightStepSize;
       int charAnalysisNumSteps;
+      float charAnalysisAspectTolerance;
 
       float plateLinesSensitivityVertical;
       float plateLinesSensitivityHorizontal;
