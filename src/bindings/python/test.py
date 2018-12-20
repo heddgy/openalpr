@@ -3,10 +3,10 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser(description='OpenALPR Python Test Program')
 
-parser.add_argument("-c", "--country", dest="country", action="store", default="us",
+parser.add_argument("-c", "--country", dest="country", action="store", default="ru",
                   help="License plate Country" )
 
-parser.add_argument("--config", dest="config", action="store", default="/etc/openalpr/openalpr.conf",
+parser.add_argument("--config", dest="config", action="store", default="/usr/share/openalpr/config/openalpr.defaults.conf",
                   help="Path to openalpr.conf config file" )
 
 parser.add_argument("--runtime_data", dest="runtime_data", action="store", default="/usr/share/openalpr/runtime_data",
@@ -25,8 +25,8 @@ try:
     else:
         print("Using OpenALPR " + alpr.get_version())
 
-        alpr.set_top_n(7)
-        alpr.set_default_region("wa")
+        alpr.set_top_n(10)
+        # alpr.set_default_region("wa")
         alpr.set_detect_region(False)
         jpeg_bytes = open(options.plate_image, "rb").read()
         results = alpr.recognize_array(jpeg_bytes)

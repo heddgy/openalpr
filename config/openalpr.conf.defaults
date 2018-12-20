@@ -1,6 +1,6 @@
 
 ; Specify the path to the runtime data directory
-runtime_dir = ${CMAKE_INSTALL_PREFIX}/share/openalpr/runtime_data
+runtime_dir = /usr/share/openalpr/runtime_data
 
 
 ocr_img_size_percent = 1.33333333
@@ -56,7 +56,8 @@ detection_mask_image =
 
 ; OpenALPR can scan the same image multiple times with different randomization.  Setting this to a value larger than
 ; 1 may increase accuracy, but will increase processing time linearly (e.g., analysis_count = 3 is 3x slower)
-analysis_count = 1
+analysis_count = 3
+thresholds = 3
 
 ; OpenALPR detects high-contrast plate crops and uses an alternative edge detection technique.  Setting this to 0.0 
 ; would classify  ALL images as high-contrast, setting it to 1.0 would classify no images as high-contrast. 
@@ -74,21 +75,20 @@ postprocess_min_confidence = 50
 postprocess_confidence_skip_level = 75
 
 
-debug_general         = 1
+debug_general         = 0
 debug_timing          = 0
 debug_detector        = 0
 debug_prewarp         = 0
 debug_state_id        = 0
 debug_plate_lines     = 0
 debug_plate_corners   = 0
-debug_char_segment    = 1
-debug_char_analysis   = 1
+debug_char_segment    = 0
+debug_char_analysis   = 0
 debug_color_filter    = 0
 debug_ocr             = 0
 debug_postprocess     = 0
-debug_show_images     = 1
-debug_pause_on_frame  = 1
-
+debug_show_images     = 0
+debug_pause_on_frame  = 0
 
 
 
