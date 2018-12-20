@@ -37,6 +37,7 @@ openalpr-*.tar.gz
 # Visual Studio files
 .vscode
 src.sln
+.vscode/
 *.vcxproj
 *.vcxproj.*
 *.suo
